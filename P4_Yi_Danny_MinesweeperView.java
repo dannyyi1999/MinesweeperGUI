@@ -2,6 +2,7 @@
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -20,20 +21,20 @@ public class P4_Yi_Danny_MinesweeperView extends Application{
 	private P4_Yi_Danny_MinesweeperModel model;
 	private P4_Yi_Danny_MinesweeperPane minePane;
 	
-	private Image one = new Image("images/num_1.gif");
-	private Image two = new Image("images/num_2.gif");
-	private Image three = new Image("images/num_3.gif");
-	private Image four = new Image("images/num_4.gif");
-	private Image five = new Image("images/num_5.gif");
-	private Image six = new Image("images/num_6.gif");
-	private Image seven = new Image("images/num_7.gif");
-	private Image eight = new Image("images/num_8.gif");
-	private Image zero = new Image("images/num_0.gif");
-	private Image blank = new Image("images/blank.gif");
-	private Image bombReveal = new Image("images/bomb_revealed.gif");
-	private Image bombDeath = new Image("images/bomb_death.gif");
-	private Image flag = new Image("images/bomb_flagged.gif");
-	private Image wrongBomb = new Image("images/num_1.gif");
+	private Image one = new Image("file://images/num_1.gif");
+	private Image two = new Image("file:images/num_2.gif");
+	private Image three = new Image("file:images/num_3.gif");
+	private Image four = new Image("file:images/num_4.gif");
+	private Image five = new Image("file:images/num_5.gif");
+	private Image six = new Image("file:images/num_6.gif");
+	private Image seven = new Image("file:images/num_7.gif");
+	private Image eight = new Image("file:images/num_8.gif");
+	private Image zero = new Image("file:images/num_0.gif");
+	private Image blank = new Image("file:images/blank.gif");
+	private Image bombReveal = new Image("file:images/bomb_revealed.gif");
+	private Image bombDeath = new Image("file:images/bomb_death.gif");
+	private Image flag = new Image("file:images/bomb_flagged.gif");
+	private Image wrongBomb = new Image("file:images/num_1.gify");
 	
 	
 	public static void main(String[] args){
@@ -49,7 +50,6 @@ public class P4_Yi_Danny_MinesweeperView extends Application{
 		model = new P4_Yi_Danny_MinesweeperModel(8, 8, 3);
 		minePane = new P4_Yi_Danny_MinesweeperPane();
 		minePane.setModel(model);
-		ImageView view = new ImageView(flag);
 		
 		minePane.setOnMouseReleased(new EventHandler<MouseEvent>(){
 			@Override
@@ -75,7 +75,15 @@ public class P4_Yi_Danny_MinesweeperView extends Application{
 		Menu game = new Menu("Game");
 		Menu help = new Menu("Help");
 		MenuItem beginnerGame = new MenuItem("New Beginner Game");
+		beginnerGame.setOnAction((i1) -> {
+			minePane.setBeginnerGame();
+			model = minePane.getModel();
+			});
 		MenuItem intermediateGame = new MenuItem("New Intermediate Game");
+		intermediateGame.setOnAction((i1) -> {
+			minePane.setIntermediateGame();
+			model = minePane.getModel();
+		});
 		MenuItem expertGame = new MenuItem("New Expert Game");
 		MenuItem exit = new MenuItem("Exit");
 		MenuItem numberMines = new MenuItem("Set Number of Mines");
