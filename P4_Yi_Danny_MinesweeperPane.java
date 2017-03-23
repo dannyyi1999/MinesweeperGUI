@@ -1,3 +1,5 @@
+
+
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -10,7 +12,7 @@ public class P4_Yi_Danny_MinesweeperPane extends Group{
 	private ImageView[][] cells;
 	private double tileSize;
 	private P4_Yi_Danny_MinesweeperModel model;
-	private Image blank = new Image("images/blank.gif");
+	private Image blank = new Image("file:images/blank.gif");
 	
 	public P4_Yi_Danny_MinesweeperPane(){
 		this.model = null;
@@ -25,31 +27,31 @@ public class P4_Yi_Danny_MinesweeperPane extends Group{
 			for (int col = 0; col < model.getNumCols(); col++) {
 				if(!model.getBoard()[row][col].isVisible()){
 					if(model.getBoard()[row][col].isFlagged()){
-						cells[row][col] = new ImageView("images/bomb_flagged.gif");
+						cells[row][col] = new ImageView("file:images/bomb_flagged.gif");
 					}else {
-						cells[row][col] = new ImageView("images/blank.gif");
+						cells[row][col] = new ImageView("file:images/blank.gif");
 					}
 				}else {
 					if(model.getBoard()[row][col].getValue() == -1){
-						cells[row][col] = new ImageView("images/bomb_revealed.gif");
+						cells[row][col] = new ImageView("file:images/bomb_death.gif");
 					}else if(model.getBoard()[row][col].getValue() == 0){
-						cells[row][col] = new ImageView("images/num_0.gif");
+						cells[row][col] = new ImageView("file:images/num_0.gif");
 					}else if(model.getBoard()[row][col].getValue() == 1){
-						cells[row][col] = new ImageView("images/num_1.gif");
+						cells[row][col] = new ImageView("file:images/num_1.gif");
 					}else if(model.getBoard()[row][col].getValue() == 2){
-						cells[row][col] = new ImageView("images/num_2.gif");
+						cells[row][col] = new ImageView("file:images/num_2.gif");
 					}else if(model.getBoard()[row][col].getValue() == 3){
-						cells[row][col] = new ImageView("images/num_3.gif");
+						cells[row][col] = new ImageView("file:images/num_3.gif");
 					}else if(model.getBoard()[row][col].getValue() == 4){
-						cells[row][col] = new ImageView("images/num_4.gif");
+						cells[row][col] = new ImageView("file:images/num_4.gif");
 					}else if(model.getBoard()[row][col].getValue() == 5){
-						cells[row][col] = new ImageView("images/num_5.gif");
+						cells[row][col] = new ImageView("file:images/num_5.gif");
 					}else if(model.getBoard()[row][col].getValue() == 6){
-						cells[row][col] = new ImageView("images/num_6.gif");
+						cells[row][col] = new ImageView("file:images/num_6.gif");
 					}else if(model.getBoard()[row][col].getValue() == 7){
-						cells[row][col] = new ImageView("images/num_7.gif");
+						cells[row][col] = new ImageView("file:images/num_7.gif");
 					}else if(model.getBoard()[row][col].getValue() == 8){
-						cells[row][col] = new ImageView("images/num_8.gif");
+						cells[row][col] = new ImageView("file:images/num_8.gif");
 					}
 				}
 				cells[row][col].setX(tileSize * col);
@@ -57,6 +59,21 @@ public class P4_Yi_Danny_MinesweeperPane extends Group{
 				getChildren().add(cells[row][col]);
 			}
 		}
+	}
+	
+	public void setBeginnerGame(){
+		this.model = new P4_Yi_Danny_MinesweeperModel(8, 8, 10);
+		resetCells();
+	}
+	
+	public void setIntermediateGame(){
+		this.model = new P4_Yi_Danny_MinesweeperModel(16, 16, 40);
+		resetCells();
+	}
+	
+	public void setExpertGame(){
+		this.model = new P4_Yi_Danny_MinesweeperModel(16, 31, 99);
+		resetCells();
 	}
 	
 	public void setModel(P4_Yi_Danny_MinesweeperModel model){
