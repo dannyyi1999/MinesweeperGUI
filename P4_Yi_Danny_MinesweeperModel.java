@@ -17,6 +17,20 @@ public class P4_Yi_Danny_MinesweeperModel implements P4_Yi_Danny_MSModel{
 		return gameOver;
 	}
 	
+	public void setGameOver(boolean gameOver){
+		this.gameOver = gameOver;
+	}
+	
+	public void revealAllBombs(){
+		for(int i = 0; i < board.length; i++){
+			for(int j = 0; j < board[0].length; j++){
+				if(!board[i][j].isVisible() && board[i][j].getValue() == -1){
+					board[i][j].setVisible(true);
+				}
+			}
+		}
+	}
+	
 	public MinePane[][] getBoard(){
 		return board;
 	}
@@ -50,6 +64,8 @@ public class P4_Yi_Danny_MinesweeperModel implements P4_Yi_Danny_MSModel{
 		&& !board[row][col].isFlagged()){
 			board[row][col].setVisible(true);
 			if(board[row][col].getValue() == -1){
+				board[row][col].setValue(-2);
+				revealAllBombs();
 				gameOver = true;
 			}else if(board[row][col].getValue() > 0 && board[row][col].getValue() < 9){
 				numRevealed++;
@@ -179,11 +195,12 @@ class MinePane {
 	
 	boolean visible;
 	int value;
-	boolean flagged = false;
+	boolean flagged;
 	
 	public MinePane(int value, boolean visible){
 		this.value = value;
 		this.visible = visible;
+		this.flagged = false;
 	}
 	
 	public int getValue(){
