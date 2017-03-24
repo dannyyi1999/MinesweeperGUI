@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -34,7 +33,7 @@ public class P4_Yi_Danny_MinesweeperView extends Application{
 	private Image bombReveal = new Image("file:images/bomb_revealed.gif");
 	private Image bombDeath = new Image("file:images/bomb_death.gif");
 	private Image flag = new Image("file:images/bomb_flagged.gif");
-	private Image wrongBomb = new Image("file:images/num_1.gify");
+	private Image wrongBomb = new Image("file:images/bomb_wrong.gif");
 	
 	
 	public static void main(String[] args){
@@ -47,25 +46,27 @@ public class P4_Yi_Danny_MinesweeperView extends Application{
 		BorderPane root = new BorderPane();
 		Scene scene = new Scene(root, 500, 500);
 		
-		model = new P4_Yi_Danny_MinesweeperModel(8, 8, 3);
+		model = new P4_Yi_Danny_MinesweeperModel(8, 8, 10);
 		minePane = new P4_Yi_Danny_MinesweeperPane();
 		minePane.setModel(model);
 		
 		minePane.setOnMouseReleased(new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent e) {
-				int row = minePane.rowForYPos(e.getY());
-				int col = minePane.colForXPos(e.getX());
-				if(row >= 0 && row < minePane.getModel().getNumRows() && col >= 0 && col < minePane.getModel().getNumCols()){
-					if(e.getButton().equals(MouseButton.PRIMARY)){
-						if(!model.getBoard()[row][col].isVisible()){
-							model.reveal(row, col);
-							minePane.setModel(model);
-						}
-					}else if(e.getButton().equals(MouseButton.SECONDARY)){
-						if(!model.getBoard()[row][col].isVisible()){
-							model.setFlag(row, col);
-							minePane.setModel(model);
+				if(!model.isGameOver()){
+					int row = minePane.rowForYPos(e.getY());
+					int col = minePane.colForXPos(e.getX());
+					if(row >= 0 && row < minePane.getModel().getNumRows() && col >= 0 && col < minePane.getModel().getNumCols()){
+						if(e.getButton().equals(MouseButton.PRIMARY)){
+							if(!model.getBoard()[row][col].isVisible()){
+								model.reveal(row, col);
+								minePane.setModel(model);
+							}
+						}else if(e.getButton().equals(MouseButton.SECONDARY)){
+							if(!model.getBoard()[row][col].isVisible()){
+								model.setFlag(row, col);
+								minePane.setModel(model);
+							}
 						}
 					}
 				}}});
